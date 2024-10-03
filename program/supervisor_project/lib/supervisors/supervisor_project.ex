@@ -1,6 +1,11 @@
 defmodule MyApp do
   use Application
 
+  # Using `use Application` implies that this module is the entry point of an OTP application.
+  # It requires implementing the `start/2` callback, which is called when the application starts.
+  # This allows the module to set up the application's supervision tree and any other
+  # initialization needed for the application to run.
+
   def start(_type, _args) do
     # Start the top-level supervisor
     MySupervisor.start_link(:ok)

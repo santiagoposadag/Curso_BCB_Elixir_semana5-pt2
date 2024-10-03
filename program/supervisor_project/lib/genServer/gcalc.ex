@@ -50,13 +50,15 @@ defmodule GCalc do
     raise ArgumentError, message: "No se puede dividir por cero"
    {:reply, {:error, "No se puede dividir por cero"}, state}
  end
+
  @impl true
  def handle_call({:division, a, b}, _from, state) do
    {:reply, a / b, state}
  end
 
  @impl true
- def handle_info(_msg, state) do
+ def handle_info(msg, state) do
+   IO.puts("Received message: #{inspect(msg)}")
    {:noreply, state}
  end
 

@@ -35,6 +35,12 @@ defmodule MyWorker do
 
   @impl true
   def handle_call(:crash, _from, state) do
+    # Return parameters:
+    # :stop - Tells the GenServer to stop
+    # :normal - Reason for stopping (normal termination)
+    # state - Current state, returned to the caller
+    # The last 'state' is the final state of the server before stopping
+
     # Simulate a crash
     {:stop, :normal, state}
   end

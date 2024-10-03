@@ -16,6 +16,12 @@ defmodule Inventory do
   # Update the stock level of a product
   def update_stock(product, quantity) do
     Agent.update(__MODULE__, fn inventory ->
+      # Map.update(map, key, initial, function)
+      # - map: The inventory map
+      # - key: The product we're updating
+      # - initial: The initial value if the key doesn't exist (quantity)
+      # - function: How to update if the key exists (&(&1 + quantity))
+      #   &1 is the current value, we add the new quantity to it
       Map.update(inventory, product, quantity, &(&1 + quantity))
     end)
   end
@@ -23,6 +29,11 @@ defmodule Inventory do
   # Get the current stock level of a product
   def get_stock(product) do
     Agent.get(__MODULE__, fn inventory ->
+      # Map.get(map, key, default)
+      # - map: The inventory map we're searching in
+      # - key: The product we're looking for
+      # - default: The value to return if the product isn't found (0 in this case)
+      # This ensures we always return a number, even for non-existent products
       Map.get(inventory, product, 0)
     end)
   end

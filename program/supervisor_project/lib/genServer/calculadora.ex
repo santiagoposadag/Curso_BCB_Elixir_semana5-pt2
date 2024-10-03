@@ -25,7 +25,7 @@ defmodule Calc do
       {pid, :suma, a, b} -> send(pid, a + b)
       {pid, :sub, a, b} -> send(pid,  a - b)
       {pid, :mult, a, b} -> send(pid,  a * b)
-      {_pid, :div, _a, 0} -> raise ArgumentError, message: "No se puede dividir por cero"
+      {_pid, :div, _a, 0} -> exit(:division_by_zero)
       {pid, :div, a, b} -> send(pid,  a / b)
     end
     calculadora()
